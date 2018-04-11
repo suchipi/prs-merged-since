@@ -39,7 +39,7 @@ prsMergedSince({
   tag: "1.11.1", // required
   githubApiToken: "your_token_goes_here", // optional
 }).then((prs) => {
-  // prs is an array or PR objects as returned by the GitHub API
+  // prs is an array of PR objects as returned by the GitHub API
 });
 ```
 
