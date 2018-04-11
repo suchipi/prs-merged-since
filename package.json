@@ -1,0 +1,18 @@
+{
+  "name": "prs-merged-since",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": "cli.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-unobtrusive": "^1.2.2",
+    "eslint-plugin-import": "^2.10.0",
+    "prettier": "^1.11.1"
+  },
+  "dependencies": {
+    "@octokit/rest": "^15.2.6",
+    "ora": "^2.0.0",
+    "yargs": "^11.0.0"
+  }
+}
