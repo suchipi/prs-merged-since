@@ -13,6 +13,8 @@ Options:
   --repo     GitHub repository, eg Microsoft/vscode                   [required]
   --tag      Tag to show merged PRs relative to, eg 1.1.3             [required]
   --format   Output format. Can be 'json' or 'markdown'.       [default: "json"]
+  --references  Extract link references when format is markdown
+                                                      [boolean] [default: false]
 ```
 
 For example:
