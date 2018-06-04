@@ -1,6 +1,6 @@
 {
   "name": "prs-merged-since",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "bin": "cli.js",
   "license": "MIT",
