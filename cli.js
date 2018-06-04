@@ -10,6 +10,11 @@ const argv = require("yargs")
     describe: "Output format. Can be 'json' or 'markdown'.",
     default: "json",
   })
+  .option("references", {
+    describe: "Extract link references when format is markdown",
+    type: "boolean",
+    default: false,
+  })
   .demandOption(["repo", "tag"]).argv;
 
 const ora = require("ora");
@@ -26,14 +31,35 @@ prsMergedSince({
     spinner.stop();
 
     if (argv.format === "markdown") {
-      const markdownLines = prs.map((pr) => {
-        console.log(
-          `#### ${pr.title} ([#${pr.number}](${pr.html_url}) by [@${
-            pr.user.login
-          }](${pr.user.html_url}))\n`
-        );
-      });
-      return markdownLines.join("\n");
+      const userLinks = {};
+      const prLinks = {};
+
+      for (const pr of prs) {
+        const login = `@${pr.user.login}`;
+        const prRef = `#${pr.number}`;
+
+        if (argv.references) {
+          userLinks[login] = pr.user.html_url;
+          prLinks[prRef] = pr.html_url;
+          console.log(`#### ${pr.title} ([${prRef}] by [${login}])`);
+        } else {
+          console.log(
+            `#### ${pr.title} ([${prRef}](${pr.html_url}) by [${login}](${
+              pr.user.html_url
+            }))`
+          );
+        }
+      }
+
+      if (argv.references) {
+        console.log();
+        for (const login of Object.keys(userLinks)) {
+          console.log(`[${login}]: ${userLinks[login]}`);
+        }
+        for (const pr of Object.keys(prLinks)) {
+          console.log(`[${pr}]: ${prLinks[pr]}`);
+        }
+      }
     } else {
       console.log(JSON.stringify(prs, null, 2));
     }
